@@ -1,0 +1,54 @@
+<template>
+  <div class="container">
+    {{msg}}
+    <div>
+      <input type="text" placeholder="What needs to be done" class="todo-input"
+      v-model="newTodo" @keyup.enter="addTodo">
+    </div>
+    <div v-for="(todo, index) in todos" class="todo-item">
+      <ul>
+        <li>{{todo.title}}</li>
+        <button type="button" @click="deleteTodo(index)">x</button>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "TodoList",
+  data() {
+    return {
+      msg: "Bienvenido a mi todo list",
+      newTodo: '',
+      todos: [
+        {title: 'Finish Vue Screencast', completed: false},
+        {title: 'Take over world', completed: false}
+      ]
+    }
+  },
+  methods: {
+    addTodo() {
+      this.todos.push({title: this.newTodo, completed: false})
+      this.newTodo = "";
+    },
+    deleteTodo(index) {
+      this.todos.splice(index, 1)
+    }
+  }
+}
+</script>
+
+<style>
+.todo-item ul{
+  list-style-type: none;
+}
+.todo-input {
+  width: 70%;
+  padding: 10px 18px;
+  font-size: 15px;
+  margin: 5px;
+}
+</style>
+
+
